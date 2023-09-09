@@ -1,0 +1,23 @@
+{
+  "name": "web",
+  "version": "1.0.0",
+  "description": "Репозиторий для практики по проекту web разрботка",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Blooddub/Web.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Blooddub/Web/issues"
+  },
+  "homepage": "https://github.com/Blooddub/Web#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "hbs": "^4.2.0"
+  }
+}
