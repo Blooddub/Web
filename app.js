@@ -20,6 +20,7 @@ app.get("/", function(request, response){
     
     response.render('main', {
         title: 'First task',
+        header: 'Первое задание',
         mass: array,
         sortmass: sortArray,
     });
@@ -28,7 +29,6 @@ app.get("/", function(request, response){
 app.listen(port, host, function () {
     console.log(`Start server http://${host}:${port}`);
 });
-
 
 function bubbleSort(arr) {
     let swap;

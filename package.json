@@ -4,7 +4,7 @@
   "description": "Репозиторий для практики по проекту web разрботка",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
@@ -18,6 +18,7 @@
   "homepage": "https://github.com/Blooddub/Web#readme",
   "dependencies": {
     "express": "^4.18.2",
-    "hbs": "^4.2.0"
+    "hbs": "^4.2.0",
+    "pg": "^8.11.3"
   }
 }
