@@ -25,7 +25,7 @@ CREATE TABLE students(
     first_name VARCHAR(255) NOT NULL,
     surname VARCHAR(255) NOT NULL,
     patronymic VARCHAR(255),
-	age SMALLINT NOT NULL,
+	birthday DATE NOT NULL,
     date_admission DATE NOT NULL,
     group_id INTEGER REFERENCES groups(id),
     update_at DATE,

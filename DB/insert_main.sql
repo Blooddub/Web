@@ -24,18 +24,18 @@ INSERT INTO disciplines (name, created_at) VALUES ('Газоснабжение',
 INSERT INTO disciplines (name, created_at) VALUES ('Теплоснабжение', current_timestamp);
 
 
-INSERT INTO students (first_name, surname, patronymic, age, date_admission, group_id, created_at) VALUES ('Иванов', 'Иван','Иванович', 18, '1997-06-05', 1, current_timestamp);
-INSERT INTO students (first_name, surname, patronymic, age, date_admission, group_id, created_at) VALUES ('Петров', 'Петр','Петрович', 19, '1991-05-22', 1, current_timestamp);
-INSERT INTO students (first_name, surname, patronymic, age, date_admission, group_id, created_at) VALUES ('Макаров', 'Георгий','Михайлович', 18, '2003-09-26', 1, current_timestamp);
-INSERT INTO students (first_name, surname, patronymic, age, date_admission, group_id, created_at) VALUES ('Ильина', 'Варвара','Всеволодовна', 23, '1988-01-21', 2, current_timestamp);
-INSERT INTO students (first_name, surname, patronymic, age, date_admission, group_id, created_at) VALUES ('Спиридонов', 'Александр','Елисеевич', 16, '1998-05-29', 2, current_timestamp);
-INSERT INTO students (first_name, surname, patronymic, age, date_admission, group_id, created_at) VALUES ('Леонова', 'Милана','Владимировна', 14, '1993-06-08', 2, current_timestamp);
-INSERT INTO students (first_name, surname, patronymic, age, date_admission, group_id, created_at) VALUES ('Тихомирова', 'Таисия','Никитична', 17, '1980-06-02', 3, current_timestamp);
-INSERT INTO students (first_name, surname, patronymic, age, date_admission, group_id, created_at) VALUES ('Галкин', 'Мирон','Тимурович', 18, '1992-07-18', 3, current_timestamp);
-INSERT INTO students (first_name, surname, patronymic, age, date_admission, group_id, created_at) VALUES ('Зайцев', 'Артём','Артурович', 20, '1981-06-21', 3, current_timestamp);
-INSERT INTO students (first_name, surname, patronymic, age, date_admission, group_id, created_at) VALUES ('Семенов', 'Михаил','Романович', 21, '1999-10-29', 4, current_timestamp);
-INSERT INTO students (first_name, surname, patronymic, age, date_admission, group_id, created_at) VALUES ('Кондрашов', 'Дмитрий','Львович', 20, '1999-09-12', 4, current_timestamp);
-INSERT INTO students (first_name, surname, patronymic, age, date_admission, group_id, created_at) VALUES ('Андреев', 'Лев','Иванович', 32, '1994-09-26', 4, current_timestamp);
+INSERT INTO students (first_name, surname, patronymic, birthday, date_admission, group_id, created_at) VALUES ('Иванов', 'Иван','Иванович', '1997-04-05', '1997-06-05', 1, current_timestamp);
+INSERT INTO students (first_name, surname, patronymic, birthday, date_admission, group_id, created_at) VALUES ('Петров', 'Петр','Петрович', '1997-03-05', '1991-05-22', 1, current_timestamp);
+INSERT INTO students (first_name, surname, patronymic, birthday, date_admission, group_id, created_at) VALUES ('Макаров', 'Георгий','Михайлович', '1997-02-05', '2003-09-26', 1, current_timestamp);
+INSERT INTO students (first_name, surname, patronymic, birthday, date_admission, group_id, created_at) VALUES ('Ильина', 'Варвара','Всеволодовна', '1997-06-08', '1988-01-21', 2, current_timestamp);
+INSERT INTO students (first_name, surname, patronymic, birthday, date_admission, group_id, created_at) VALUES ('Спиридонов', 'Александр','Елисеевич', '1997-06-21', '1998-05-29', 2, current_timestamp);
+INSERT INTO students (first_name, surname, patronymic, birthday, date_admission, group_id, created_at) VALUES ('Леонова', 'Милана','Владимировна', '1997-04-05', '1993-06-08', 2, current_timestamp);
+INSERT INTO students (first_name, surname, patronymic, birthday, date_admission, group_id, created_at) VALUES ('Тихомирова', 'Таисия','Никитична', '1997-08-03', '1980-06-02', 3, current_timestamp);
+INSERT INTO students (first_name, surname, patronymic, birthday, date_admission, group_id, created_at) VALUES ('Галкин', 'Мирон','Тимурович', '1997-04-16', '1992-07-18', 3, current_timestamp);
+INSERT INTO students (first_name, surname, patronymic, birthday, date_admission, group_id, created_at) VALUES ('Зайцев', 'Артём','Артурович', '1997-08-03', '1981-06-21', 3, current_timestamp);
+INSERT INTO students (first_name, surname, patronymic, birthday, date_admission, group_id, created_at) VALUES ('Семенов', 'Михаил','Романович', '1997-09-05', '1999-10-29', 4, current_timestamp);
+INSERT INTO students (first_name, surname, patronymic, birthday, date_admission, group_id, created_at) VALUES ('Кондрашов', 'Дмитрий','Львович', '1997-12-01', '1999-09-12', 4, current_timestamp);
+INSERT INTO students (first_name, surname, patronymic, birthday, date_admission, group_id, created_at) VALUES ('Андреев', 'Лев','Иванович', '1997-11-23', '1994-09-26', 4, current_timestamp);
 
 
 INSERT INTO grades (student_id, disciplines_id, grade, created_at) VALUES (1, 1, 5, current_timestamp);
