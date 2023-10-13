@@ -4,7 +4,7 @@ for (let i = 1; i < 13; i++){
         for (let x = 1; x < 5; x++)
         {
             let rand = getRandomInt(1, 5);
-            console.log("INSERT INTO grades (student_id, disciplines_id, grade, created_at) VALUES ("+ i + ", "+ j + ", "+ rand + ", current_timestamp);")
+            console.log("INSERT INTO grades (student_id, disciplines_id, grade, created_at, update_at) VALUES ("+ i + ", "+ j + ", "+ rand + ", current_timestamp, current_timestamp);")
         }
     }
 }

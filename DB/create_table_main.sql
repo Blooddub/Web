@@ -1,11 +1,11 @@
-CREATE TABLE universities(
+CREATE TABLE university(
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     update_at DATE,
     created_at DATE
 );
 
-CREATE TABLE disciplines(
+CREATE TABLE discipline(
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     update_at DATE,
@@ -15,12 +15,12 @@ CREATE TABLE disciplines(
 CREATE TABLE groups(
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
-    university_id INTEGER REFERENCES universities(id),
+    university_id INTEGER REFERENCES universitie(id),
     update_at DATE,
     created_at DATE
 );
 
-CREATE TABLE students(
+CREATE TABLE student(
     id SERIAL PRIMARY KEY,
     first_name VARCHAR(255) NOT NULL,
     surname VARCHAR(255) NOT NULL,
@@ -32,17 +32,11 @@ CREATE TABLE students(
     created_at DATE
 );
 
-CREATE TABLE grades(
+CREATE TABLE grade(
     id SERIAL PRIMARY KEY,
     grade  SMALLINT NOT NULL,
-    disciplines_id INTEGER REFERENCES disciplines(id),
-    student_id INTEGER REFERENCES students(id),
+    discipline_id INTEGER REFERENCES discipline(id),
+    student_id INTEGER REFERENCES student(id),
     update_at DATE,
     created_at DATE
 );
-
-
-
-
-
-

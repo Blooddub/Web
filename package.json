@@ -1,7 +1,7 @@
 {
   "name": "web",
   "version": "1.0.0",
-  "description": "Репозиторий для практики по проекту web разрботка",
+  "description": "Репозиторий для дисциплины web разработка ",
   "main": "app.js",
   "scripts": {
     "start": "node app.js"
@@ -10,15 +10,12 @@
     "type": "git",
     "url": "git+https://github.com/Blooddub/Web.git"
   },
-  "author": "",
+  "author": "Dowgit",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Blooddub/Web/issues"
   },
   "homepage": "https://github.com/Blooddub/Web#readme",
   "dependencies": {
-    "express": "^4.18.2",
-    "hbs": "^4.2.0",
-    "pg": "^8.11.3"
   }
 }
