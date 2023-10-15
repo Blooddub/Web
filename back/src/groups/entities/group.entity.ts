@@ -15,7 +15,7 @@ export class Groups {
     university: University;
 
     @OneToMany(() => Student, (student) => student.group)
-    students: Student[];
+    students?: Student[];
 
     @UpdateDateColumn()
     update_at: Date;

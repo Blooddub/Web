@@ -29,6 +29,9 @@ export class Student {
     @OneToMany(() => Grade, (grade) => grade.student)
     grades: Grade[];
 
+    // @Column()
+    // is_deleted: Boolean;
+
     @UpdateDateColumn()
     update_at: Date;
 

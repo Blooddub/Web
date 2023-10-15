@@ -19,11 +19,11 @@ export class StudentsController {
   findAll() {
     return this.studentsService.findAll();
   }
-
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.studentsService.findOne(+id);
-  // }
+// http://localhost:3000/students/:id
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.studentsService.findOne(+id);
+  }
 
   // @Patch(':id')
   // update(@Param('id') id: string, @Body() updateStudentDto: UpdateStudentDto) {

@@ -1,4 +1,5 @@
-import { IsDateString, IsInt, IsString } from "class-validator";
+import { IsBoolean, IsDateString, IsInt, IsString } from "class-validator";
+import { Groups } from "src/groups/entities/group.entity";
 
 export class CreateStudentDto {
     @IsString()
@@ -16,6 +17,8 @@ export class CreateStudentDto {
     @IsDateString()
     date_admission: Date;
 
-    @IsInt()
-    group: number;
+    // @IsBoolean()
+    // is_delete: Boolean;
+
+    group: Groups;
 }
