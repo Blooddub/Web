@@ -8,6 +8,9 @@ import { StudentsModule } from './students/students.module';
 import { GroupsModule } from './groups/groups.module';
 import { GradesModule } from './grades/grades.module';
 import { DisciplinesModule } from './disciplines/disciplines.module';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
+
 
 @Module({
   imports: [
@@ -31,6 +34,8 @@ import { DisciplinesModule } from './disciplines/disciplines.module';
     GroupsModule,
     GradesModule,
     DisciplinesModule,
+    AuthModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],

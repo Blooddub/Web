@@ -1,6 +1,6 @@
 import { PartialType } from '@nestjs/mapped-types';
 import { CreateStudentDto } from './create-student.dto';
-import { IsBoolean, IsDateString, IsInt, IsString } from 'class-validator';
+import { IsBoolean, IsDateString, IsString } from 'class-validator';
 import { Groups } from 'src/groups/entities/group.entity';
 
 export class UpdateStudentDto extends PartialType(CreateStudentDto) {
