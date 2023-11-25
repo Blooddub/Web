@@ -10,5 +10,6 @@ import { University } from './entities/university.entity';
   ],
   controllers: [UniversitiesController],
   providers: [UniversitiesService],
+  exports: [UniversitiesService]
 })
 export class UniversitiesModule {}

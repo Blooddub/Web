@@ -1,7 +1,6 @@
 import { Grade } from "src/grades/entities/grade.entity";
 import { Groups } from "src/groups/entities/group.entity";
-import { User } from "src/users/entities/user.entity";
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity()
 export class Student {
@@ -30,12 +29,10 @@ export class Student {
     @OneToMany(() => Grade, (grade) => grade.student)
     grades: Grade[];
 
-    // @OneToOne(() => User)
-    // @JoinColumn()
-    // user: User;
-
-    // @Column()
-    // is_deleted: Boolean;
+    @Column({
+        default: false
+    })
+    is_deleted: Boolean;
 
     @UpdateDateColumn()
     update_at: Date;

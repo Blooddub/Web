@@ -1,13 +1,15 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-
-const PORT = 3000;
+import { ConfigService } from '@nestjs/config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  // app.setGlobalPrefix('api');
+  app.setGlobalPrefix('api');
   app.enableCors();
-  await app.listen(PORT);
-  console.log(`Сервер запушен на http://localhost:${PORT}/`);
+  const configService: ConfigService = app.get(ConfigService);
+  const PORT = configService.get("APP_PORT");
+  const HOST = configService.get("APP_HOST");
+  await app.listen(PORT,HOST);
+  console.log(`Сервер запушен на http://${HOST}:${PORT}/api`);
 }
 bootstrap();

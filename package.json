@@ -4,7 +4,8 @@
   "description": "Репозиторий для дисциплины web разработка ",
   "main": "app.js",
   "scripts": {
-    "back-start:debug": "cd back && nest start --debug --watch"
+    "back-start:debug": "cd back && nest start --debug --watch",
+    "front-start:debug": "cd front && npm run serve"
   },
   "repository": {
     "type": "git",

@@ -1,40 +1,51 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, UsePipes, ParseIntPipe, ValidationPipe } from '@nestjs/common';
 import { GroupsService } from './groups.service';
 import { CreateGroupDto } from './dto/create-group.dto';
 import { UpdateGroupDto } from './dto/update-group.dto';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { UniversitiesService } from 'src/universities/universities.service';
 
 @Controller('groups')
 export class GroupsController {
-  constructor(private readonly groupsService: GroupsService) {}
+  constructor(
+    private readonly groupsService: GroupsService) {}
 
+  // POST /groups
   @Post()
   @UseGuards(JwtAuthGuard)
+  @UsePipes(new ValidationPipe)
   create(@Body() createGroupDto: CreateGroupDto) {
     return this.groupsService.create(createGroupDto);
   }
 
+  // GET /groups
   @Get()
   @UseGuards(JwtAuthGuard)
   findAll() {
     return this.groupsService.findAll();
   }
 
+  // GET /groups/:id
   @Get(':id')
   @UseGuards(JwtAuthGuard)
-  findOne(@Param('id') id: string) {
-    return this.groupsService.findOne(+id);
+  @UsePipes(new ValidationPipe)
+  findOne(@Param('id') id: number) {
+    return this.groupsService.findOne(id);
   }
 
+  // PATCH /groups/:id
   @Patch(':id')
   @UseGuards(JwtAuthGuard)
-  update(@Param('id') id: string, @Body() updateGroupDto: UpdateGroupDto) {
-    return this.groupsService.update(+id, updateGroupDto);
+  @UsePipes(new ValidationPipe)
+  update(@Param('id') id: number, @Body() updateGroupDto: UpdateGroupDto) {
+    return this.groupsService.update(updateGroupDto, id);
   }
 
+  // DELETE /groups/:id
   @Delete(':id')
   @UseGuards(JwtAuthGuard)
-  remove(@Param('id') id: string) {
-    return this.groupsService.remove(+id);
+  @UsePipes(new ValidationPipe)
+  remove(@Param('id') id: number) {
+    return this.groupsService.remove(id);
   }
 }

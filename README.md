@@ -7,7 +7,7 @@
 ## Запуск
 
 ### Клиент
- 
+``` npm run front-start:debug ```
 
 ### Сервер 
 ``` npm run back-start:debug ```

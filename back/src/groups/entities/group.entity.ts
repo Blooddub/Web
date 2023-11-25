@@ -17,6 +17,11 @@ export class Groups {
     @OneToMany(() => Student, (student) => student.group)
     students?: Student[];
 
+    @Column({
+        default: false
+    })
+    is_deleted: Boolean;
+
     @UpdateDateColumn()
     update_at: Date;
 

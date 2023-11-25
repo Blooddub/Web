@@ -12,6 +12,11 @@ export class University {
     @OneToMany(() => Groups, (group) => group.university)
     groups: Groups[];
 
+    @Column({
+        default: false
+    })
+    is_deleted: Boolean;
+
     @UpdateDateColumn()
     update_at: Date;
 

@@ -10,5 +10,6 @@ import { Discipline } from './entities/discipline.entity';
   ],
   controllers: [DisciplinesController],
   providers: [DisciplinesService],
+  exports: [DisciplinesService]
 })
 export class DisciplinesModule {}

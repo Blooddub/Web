@@ -40,3 +40,11 @@ CREATE TABLE grade(
     update_at DATE,
     created_at DATE
 );
+
+CREATE TABLE profile(
+    id SERIAL PRIMARY KEY,
+    login  VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    update_at DATE,
+    created_at DATE
+);

@@ -1,3 +1,6 @@
+INSERT INTO users (login, password, created_at, update_at) VALUES ('test', 'test',current_timestamp, current_timestamp);
+
+
 INSERT INTO university (name, created_at, update_at) VALUES ('КГПИ',current_timestamp, current_timestamp);
 INSERT INTO university (name, created_at, update_at) VALUES ('СИБГИУ', current_timestamp, current_timestamp);
 INSERT INTO university (name, created_at, update_at) VALUES ('НГУ', current_timestamp, current_timestamp);

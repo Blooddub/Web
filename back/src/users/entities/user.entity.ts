@@ -1,20 +1,25 @@
-import { Student } from "src/students/entities/student.entity";
-import { Column, CreateDateColumn, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity()
-export class User {
+export class Users {
     @PrimaryGeneratedColumn()
     id: number;
 
     @Column()
     login: string;
 
+    @Column({
+        nullable: true,
+    })
+    name: string;
+
     @Column()
     password: string;
 
-    // @OneToOne(() => Student)
-    // @JoinColumn()
-    // student: Student;
+    @Column({
+        default: false
+    })
+    is_deleted: Boolean;
 
     @UpdateDateColumn()
     update_at: Date;

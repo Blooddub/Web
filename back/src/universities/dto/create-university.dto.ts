@@ -1,16 +1,13 @@
-import { IsDateString, IsInt, IsString } from "class-validator";
+import { IsInt, IsNotEmpty, IsString } from "class-validator";
 
 export class CreateUniversityDto {
 
     @IsInt()
+    @IsNotEmpty()
     id: number;
 
     @IsString()
+    @IsNotEmpty()
     name: string;
 
-    @IsDateString()
-    update_at: Date;
-
-    @IsDateString()
-    created_at: Date;
 }

@@ -1,24 +1,32 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UsePipes, ValidationPipe, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, UsePipes, ValidationPipe, UseGuards, ParseIntPipe } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { error } from 'console';
 
 @Controller('user')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @Post()
-  @UsePipes(new ValidationPipe())
-  @UseGuards(JwtAuthGuard)
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.usersService.create(createUserDto);
-  }
+  // @Post()
+  // @UsePipes(new ValidationPipe())
+  // @UseGuards(JwtAuthGuard)
+  // create(@Body() createUserDto: CreateUserDto) {
+  //   return this.usersService.create(createUserDto);
+  // }
 
   @Get(':id')
+  @UsePipes(new ValidationPipe())
   @UseGuards(JwtAuthGuard)
-  findOne(@Param('id') id: string) {
+  async findOne(@Param('id', ParseIntPipe) id: number) {
     return this.usersService.findOne(id);
+  }
+
+  @Patch("update")
+  @UsePipes(new ValidationPipe())
+  @UseGuards(JwtAuthGuard)
+  async update(@Body() updateUserDto: UpdateUserDto) {
+    return this.usersService.update(updateUserDto);
   }
 
 }

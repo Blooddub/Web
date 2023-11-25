@@ -1,4 +1,4 @@
-import { IsString, MinLength } from "class-validator";
+import { IsInt, IsString, MinLength, ValidateIf } from "class-validator";
 
 export class CreateUserDto {
 
@@ -7,4 +7,8 @@ export class CreateUserDto {
 
     @MinLength(8, {message: 'Не коректный пароль'})
     password: string;
+
+    @IsString()
+    @ValidateIf((object, value) => value !== null)
+    name?: string;
 }

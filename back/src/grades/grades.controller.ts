@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { GradesService } from './grades.service';
 import { CreateGradeDto } from './dto/create-grade.dto';
 import { UpdateGradeDto } from './dto/update-grade.dto';
@@ -10,6 +10,7 @@ export class GradesController {
 
   @Post()
   @UseGuards(JwtAuthGuard)
+  @UsePipes(new ValidationPipe)
   create(@Body() createGradeDto: CreateGradeDto) {
     return this.gradesService.create(createGradeDto);
   }
@@ -22,18 +23,21 @@ export class GradesController {
 
   @Get(':id')
   @UseGuards(JwtAuthGuard)
+  @UsePipes(new ValidationPipe)
   findOne(@Param('id') id: string) {
     return this.gradesService.findOne(+id);
   }
 
   @Patch(':id')
   @UseGuards(JwtAuthGuard)
+  @UsePipes(new ValidationPipe)
   update(@Param('id') id: string, @Body() updateGradeDto: UpdateGradeDto) {
     return this.gradesService.update(+id, updateGradeDto);
   }
 
   @Delete(':id')
   @UseGuards(JwtAuthGuard)
+  @UsePipes(new ValidationPipe)
   remove(@Param('id') id: string) {
     return this.gradesService.remove(+id);
   }

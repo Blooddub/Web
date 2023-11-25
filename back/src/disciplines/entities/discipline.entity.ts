@@ -12,6 +12,11 @@ export class Discipline {
     @OneToMany(() => Grade, (grade) => grade.discipline)
     grades: Grade[];
 
+    @Column({
+        default: false
+    })
+    is_deleted: Boolean;
+
     @UpdateDateColumn()
     update_at: Date;
 

@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { UniversitiesService } from './universities.service';
 import { CreateUniversityDto } from './dto/create-university.dto';
 import { UpdateUniversityDto } from './dto/update-university.dto';
@@ -9,6 +9,7 @@ export class UniversitiesController {
   constructor(private readonly universitiesService: UniversitiesService) {}
 
   @Post()
+  @UsePipes(new ValidationPipe)
   create(@Body() createUniversityDto: CreateUniversityDto) {
     return this.universitiesService.create(createUniversityDto);
   }
@@ -20,20 +21,23 @@ export class UniversitiesController {
   }
 
   @Get(':id')
+  @UsePipes(new ValidationPipe)
   @UseGuards(JwtAuthGuard)
   findOne(@Param('id') id: string) {
     return this.universitiesService.findOne(+id);
   }
 
-  @Patch(':id')
+  @Patch("update")
+  @UsePipes(new ValidationPipe)
   @UseGuards(JwtAuthGuard)
-  update(@Param('id') id: string, @Body() updateUniversityDto: UpdateUniversityDto) {
-    return this.universitiesService.update(+id, updateUniversityDto);
+  update(@Body() updateUniversityDto: UpdateUniversityDto) {
+    return this.universitiesService.update(updateUniversityDto);
   }
 
   @Delete(':id')
   @UseGuards(JwtAuthGuard)
-  remove(@Param('id') id: string) {
-    return this.universitiesService.remove(+id);
+  @UsePipes(new ValidationPipe)
+  remove(@Param('id') id: number) {
+    return this.universitiesService.remove(id);
   }
 }

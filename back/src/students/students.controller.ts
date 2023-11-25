@@ -1,34 +1,51 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UsePipes, ValidationPipe, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UsePipes, ValidationPipe, UseGuards, ParseIntPipe } from '@nestjs/common';
 import { StudentsService } from './students.service';
 import { CreateStudentDto } from './dto/create-student.dto';
 import { UpdateStudentDto } from './dto/update-student.dto';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 
-// http://localhost:3000/students
 @Controller('students')
 export class StudentsController {
   constructor(private readonly studentsService: StudentsService) {}
 
-  //Удалить если будет использоваться в промышленных целях // или добавить проверку на группу пользователей
+  // POST /students
   @Post()
   @UsePipes(new ValidationPipe())
   @UseGuards(JwtAuthGuard)
-  create(@Body() createStudentDto: CreateStudentDto) {
+  async create(@Body() createStudentDto: CreateStudentDto) {
     return this.studentsService.create(createStudentDto);
   }
 
+  // GET /students
   @Get()
   @UseGuards(JwtAuthGuard)
-  findAll() {
+  async findAll() {
     return this.studentsService.findAll();
   }
 
-  //http://localhost:3000/students/:id
+  // GET /students/:id
   @Get(':id')
   @UseGuards(JwtAuthGuard)
-  findOne(@Param('id') id: string) {
-    return this.studentsService.findOne(+id);
+  @UsePipes(new ValidationPipe)
+  async findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.studentsService.findOne(id);
+  }
+
+  // PATCH /students/update
+  @Patch("update")
+  @UseGuards(JwtAuthGuard)
+  @UsePipes(new ValidationPipe)
+  async update(@Body() updateStudentDto: UpdateStudentDto) {
+    return this.studentsService.update(updateStudentDto);
+  }
+
+  // DELETED /students/:id
+  @Delete(":id")
+  @UseGuards(JwtAuthGuard)
+  @UsePipes(new ValidationPipe())
+  async remove(@Param('id') id: number) {
+    return this.studentsService.remove(id);
   }
 
 }

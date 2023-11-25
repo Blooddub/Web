@@ -1,45 +1,105 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from './entities/user.entity';
+import { Users } from './entities/user.entity';
 import { Repository } from 'typeorm';
 import * as argon2 from "argon2";
 import { JwtService } from '@nestjs/jwt';
+import { UpdateUserDto } from './dto/update-user.dto';
+
 
 @Injectable()
 export class UsersService {
   constructor(
-    @InjectRepository(User) 
-    private readonly userRepository: Repository<User>,
+    @InjectRepository(Users) 
+    private readonly userRepository: Repository<Users>,
     private readonly jwtService: JwtService,
   ) {}
 
-
   async create(createUserDto: CreateUserDto) {
-    const existUser = await this.userRepository.findOne({
+    const IsExist = await this.userRepository.findOne({
       where: {
         login: createUserDto.login,
       }
     })
-    if(existUser) throw new BadRequestException('Пользователь уже зарегистрирован')
+
+    if(IsExist){
+      throw new BadRequestException('Пользователь уже зарегистрирован')
+    }
 
     const newUser = await this.userRepository.save({
       login: createUserDto.login,
+      name: createUserDto.name,
       password: await argon2.hash(createUserDto.password),
     });
 
-    const acess_token = this.jwtService.sign({login: createUserDto.login})
+    const access_token = this.jwtService.sign({login: newUser.login, id: newUser.id })
     
-    return {newUser, acess_token}
+    return {login: newUser.login, user_id:newUser.id, access_token}
   }
 
-  async findOne(login: string){
+  async findUser(login: string){
     return await this.userRepository.findOne(
     { 
       where: {
         login: login,
+      }
+    })
+  }
+
+  async findOne(id: number){
+    const IsExist = await this.userRepository.findOne({
+      where: {
+        id: id,
+      }
+    })
+
+    if(IsExist){
+      throw new NotFoundException('Пользователь не найден')
+    }
+
+    return await this.userRepository.findOne(
+    { 
+      where: {
+        id: id,
+      },
+      select: {
+        id: true,
+        login: true,
+        name: true,
       },
     })
+  }
+
+  async update(updateUserDto: UpdateUserDto) {
+    const IsExist = await this.userRepository.findOne({
+      where:{
+        id: updateUserDto.id,
+      }
+    });
+
+    if(IsExist){
+      throw new NotFoundException('Пользователь не найден')
+    }
+
+    const update_user = {
+      id: updateUserDto.id,
+      name: updateUserDto.name,
+    };
+
+    try {
+      await this.userRepository.update(updateUserDto.id, update_user);
+    } catch (error) {
+      throw new InternalServerErrorException()
+    }
+
+    const new_user = {
+      id: updateUserDto.id,
+      login: updateUserDto.login,
+      name: updateUserDto.name,
+    }
+
+    return new_user;
   }
 
 }

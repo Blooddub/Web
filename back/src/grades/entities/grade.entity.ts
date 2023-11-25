@@ -19,6 +19,11 @@ export class Grade {
     @JoinColumn({name: 'discipline_id'})
     discipline: Discipline;
 
+    @Column({
+        default: false
+    })
+    is_deleted: Boolean;
+
     @UpdateDateColumn()
     update_at: Date;
 
