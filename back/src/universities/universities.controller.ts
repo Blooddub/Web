@@ -8,25 +8,29 @@ import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 export class UniversitiesController {
   constructor(private readonly universitiesService: UniversitiesService) {}
 
+  // POST /universities
   @Post()
   @UsePipes(new ValidationPipe)
   create(@Body() createUniversityDto: CreateUniversityDto) {
     return this.universitiesService.create(createUniversityDto);
   }
 
+  // GET /universities
   @Get()
   @UseGuards(JwtAuthGuard)
   findAll() {
     return this.universitiesService.findAll();
   }
 
+  // GET /universities/:id
   @Get(':id')
   @UsePipes(new ValidationPipe)
   @UseGuards(JwtAuthGuard)
   findOne(@Param('id') id: string) {
     return this.universitiesService.findOne(+id);
   }
-
+  
+  // PATCH /universities/update
   @Patch("update")
   @UsePipes(new ValidationPipe)
   @UseGuards(JwtAuthGuard)
@@ -34,6 +38,7 @@ export class UniversitiesController {
     return this.universitiesService.update(updateUniversityDto);
   }
 
+  // DELETE /universities/:id
   @Delete(':id')
   @UseGuards(JwtAuthGuard)
   @UsePipes(new ValidationPipe)

@@ -54,7 +54,7 @@ export class UsersService {
       }
     })
 
-    if(IsExist){
+    if(!IsExist){
       throw new NotFoundException('Пользователь не найден')
     }
 
@@ -71,6 +71,19 @@ export class UsersService {
     })
   }
 
+  async findAll() {
+    return await this.userRepository.find({
+      select: {
+        id: true,
+        name: true,
+        login: true
+      },
+      order: {
+        id: "ASC",
+      },
+    });
+  }
+
   async update(updateUserDto: UpdateUserDto) {
     const IsExist = await this.userRepository.findOne({
       where:{
@@ -78,7 +91,7 @@ export class UsersService {
       }
     });
 
-    if(IsExist){
+    if(!IsExist){
       throw new NotFoundException('Пользователь не найден')
     }
 
@@ -93,13 +106,16 @@ export class UsersService {
       throw new InternalServerErrorException()
     }
 
-    const new_user = {
-      id: updateUserDto.id,
-      login: updateUserDto.login,
-      name: updateUserDto.name,
-    }
-
-    return new_user;
+    return await this.userRepository.findOne({
+      select: {
+        id: true,
+        name: true,
+        login: true
+      },
+      where:{
+        id: updateUserDto.id,
+      }
+    });;
   }
 
 }

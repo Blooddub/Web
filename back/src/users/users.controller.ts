@@ -2,19 +2,28 @@ import { Controller, Get, Post, Body, Patch, Param, UsePipes, ValidationPipe, Us
 import { UsersService } from './users.service';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
-import { error } from 'console';
+import { CreateUserDto } from './dto/create-user.dto';
 
 @Controller('user')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  // @Post()
-  // @UsePipes(new ValidationPipe())
-  // @UseGuards(JwtAuthGuard)
-  // create(@Body() createUserDto: CreateUserDto) {
-  //   return this.usersService.create(createUserDto);
-  // }
+  // POST /user
+  @Post()
+  @UsePipes(new ValidationPipe())
+  @UseGuards(JwtAuthGuard)
+  create(@Body() createUserDto: CreateUserDto) {
+    return this.usersService.create(createUserDto);
+  }
 
+  // GET /user
+  @Get()
+  @UseGuards(JwtAuthGuard)
+  findAll() {
+    return this.usersService.findAll();
+  }
+
+  // GET /user/:id
   @Get(':id')
   @UsePipes(new ValidationPipe())
   @UseGuards(JwtAuthGuard)
@@ -22,6 +31,7 @@ export class UsersController {
     return this.usersService.findOne(id);
   }
 
+  // PATCH /user/update
   @Patch("update")
   @UsePipes(new ValidationPipe())
   @UseGuards(JwtAuthGuard)

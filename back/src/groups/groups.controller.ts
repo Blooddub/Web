@@ -33,12 +33,12 @@ export class GroupsController {
     return this.groupsService.findOne(id);
   }
 
-  // PATCH /groups/:id
-  @Patch(':id')
+  // PATCH /groups/update
+  @Patch("update")
   @UseGuards(JwtAuthGuard)
   @UsePipes(new ValidationPipe)
-  update(@Param('id') id: number, @Body() updateGroupDto: UpdateGroupDto) {
-    return this.groupsService.update(updateGroupDto, id);
+  update(@Body() updateGroupDto: UpdateGroupDto) {
+    return this.groupsService.update(updateGroupDto);
   }
 
   // DELETE /groups/:id

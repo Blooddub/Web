@@ -15,8 +15,7 @@ export class GroupsService {
     @InjectRepository(Groups) 
     private readonly groupsRepository: Repository<Groups>,
   ) {}
-
-// 
+ 
   async create(createGroupDto: CreateGroupDto) {
     const isExistUniversity = await this.universitiesService.findOne(createGroupDto.university.id);
 
@@ -85,18 +84,24 @@ export class GroupsService {
     });
   }
 
-  async update(updateGroupDto: UpdateGroupDto, id: number) {
-    const isExist = await this.groupsRepository.findOne({
+  async update(updateGroupDto: UpdateGroupDto) {
+    const isExistUniversity = await this.universitiesService.findOne(updateGroupDto.university.id);
+
+    const isExistGroup = await this.groupsRepository.findOne({
       where:{
-        id: id,
+        id: updateGroupDto.id,
       }
     });
 
-    if (!isExist){
-      throw new NotFoundException (`This action updates a #${id} group`);
+    if (!isExistUniversity) {
+      throw new NotFoundException('This university not found!');
     }
 
-    return await this.groupsRepository.update(id, updateGroupDto);
+    if (!isExistGroup){
+      throw new NotFoundException (`This action updates a #${updateGroupDto.id} group`);
+    }
+
+    return await this.groupsRepository.update(updateGroupDto.id, updateGroupDto);
   }
 
   async remove(id: number) {

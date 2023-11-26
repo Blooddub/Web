@@ -19,7 +19,14 @@ class UserService {
     
     return await axios.patch(API_URL + 'user/update', body ,
       { headers: authHeader() }
-    );
+    )
+    .then(response => {
+      if (response.data.id) {
+        localStorage.setItem('user', JSON.stringify(response.data));
+      }
+      return response.data;
+    });
+    
   }
 }
 

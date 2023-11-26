@@ -25,7 +25,7 @@ export default {
         {title: 'Вузы', url: '/university'},
         {title: 'Группы', url: '/groups'},
         {title: 'Студенты', url: '/students'},
-        {title: 'Профиль', url: '/profile'},
+        // {title: 'Профиль', url: '/profile'},
       ]
     }
     
