@@ -1,4 +1,4 @@
-import { IsInt, IsNotEmpty, IsString } from "class-validator";
+import { IsNotEmpty, IsString } from "class-validator";
 import { University } from "src/universities/entities/university.entity";
 
 export class CreateGroupDto {
@@ -7,5 +7,7 @@ export class CreateGroupDto {
     @IsNotEmpty()
     name: string;
 
+    @IsNotEmpty()
     university: University;
+
 } 

@@ -10,13 +10,9 @@ class GroupService {
     { headers: authHeader() });
   }
 
-  async createGroup(universitiy) {
-    const body = {
-      name: universitiy.name
-    };  
+  async createGroup(body) {
     return await axios.post(API_URL + 'groups', body ,
-      { headers: authHeader() }
-    );
+      { headers: authHeader() });
   }
 
   async getGroup(id) {    
@@ -26,6 +22,11 @@ class GroupService {
 
   async updateGroup(universitiy) {    
     return await axios.patch(API_URL + 'groups/update', universitiy,
+    { headers: authHeader() });
+  }
+
+  async deleteGroup(id) {    
+    return await axios.delete(API_URL + 'groups/' + id,
     { headers: authHeader() });
   }
 

@@ -5,15 +5,14 @@ const API_URL = process.env.VUE_APP_API_URL;
 
 class StudentService {
 
-  async getStudent() {    
+  async getStudents() {    
     return await axios.get(API_URL + 'students',
     { headers: authHeader() });
   }
 
   async createStudent(student) {
     return await axios.post(API_URL + 'students', student ,
-      { headers: authHeader() }
-    );
+      { headers: authHeader() });
   }
 
   async getStudent(id) {    
@@ -23,6 +22,11 @@ class StudentService {
 
   async updateStudent(student) {    
     return await axios.patch(API_URL + 'students/update', student,
+    { headers: authHeader() });
+  }
+
+  async deleteStudent(id) {    
+    return await axios.delete(API_URL + 'students/' + id,
     { headers: authHeader() });
   }
 

@@ -24,13 +24,7 @@ export class UniversitiesService {
       throw new BadRequestException('Bad request exception')
     }
     
-    try {
-      return await this.universitysRepository.save(createUniversityDto);
-    }
-    catch (error) {
-      throw new InternalServerErrorException (`This univetsity not found`);
-    }
-    
+    return await this.universitysRepository.save(createUniversityDto);
   }
 
   async findAll() {
@@ -42,6 +36,9 @@ export class UniversitiesService {
       order: {
         id: "ASC",
       },
+      where:{
+        is_deleted: false,
+      }
     });
   }
 

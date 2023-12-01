@@ -25,6 +25,9 @@ export class DisciplinesService {
         id: true,
         name: true,
       },
+      where: {
+        is_deleted: false,
+      },
       order: {
         id: "ASC",
       }

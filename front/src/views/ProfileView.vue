@@ -1,7 +1,7 @@
 <template>
   <div v-if="curentUser">
     <div class="page-title">
-      <h3>Профиль</h3>
+      <h3>Profile</h3>
     </div>
 
     <form 
@@ -25,15 +25,12 @@
             autocomplete = "name" 
             v-model= "curentUser.name"
         > 
-        <!-- <small class="helper-text invalid" v-for="(error, index) of v$.password.$errors" :key="index">
-          {{ capitalizeFirstLetter(error.$property) }} {{error.$message}}
-        </small> -->
       </div>
       <button 
         class="btn waves-effect grey lighten-1" 
         type="submit"
       >
-        Обновить
+        Update
         <i class="material-icons right">send</i>
       </button>
     </form>
@@ -74,8 +71,7 @@ export default {
       }
 
       UserService.updateUserInfo(data_user).then(
-        (response) => {
-          console.log(response);
+        () => {
           this.getUser();
         },
         (error) => {

@@ -2,15 +2,30 @@
   <nav class="navbar grey lighten-1">
     <div class="nav-wrapper">
       <div class="navbar-left">
-        <a 
-          href="#!" 
-          class="brand-logo black-text" 
-          @click.prevent="$emit('clickMenu')"
-        >
-          <i class="material-icons">menu</i>
-          AdminWeb
-          </a>     
+        <ul href="#" class="left hide-on-med-and-down">
+          <li>
+            <a 
+              href="#!" 
+              class="brand-logo black-text" 
+              @click.prevent="$emit('clickMenu')"
+            >
+              <i class="material-icons left">menu</i>
+            </a>
+          </li>
+          <li>
+            ㅤㅤㅤ
+          </li>
+          <li>
+            <router-link 
+              :to="'/main'" 
+              class="brand-logo black-text"
+            >
+              AdminWeb
+            </router-link>
+          </li>
+        </ul>
       </div>
+
 
       <div>
         <span class="black-text">{{date}}</span>
@@ -19,11 +34,11 @@
       <div>
         <ul class="hide-on-med-and-down right">
           <li>
+            
             <a
-                class="dropdown-trigger black-text "
-                href="#"
-                data-target="dropdown"
-                ref="dropdown"
+              class="dropdown-trigger black-text"
+              data-target="dropdown"
+              ref="dropdown"
             >
               {{thisUser ? thisUser.login : "USER" }}
               <i class="material-icons right">arrow_drop_down</i>
@@ -38,7 +53,7 @@
                   :to="'/profile'" 
                   class="black-text"
                 >
-                  <i class="material-icons">account_circle</i>Профиль
+                  <i class="material-icons">account_circle</i>Profile
                 </router-link>
               </li>
               <li class="divider" tabindex="-1"></li>
@@ -48,10 +63,11 @@
                   class="black-text" 
                   @click.prevent="logout"
                 >
-                  <i class="material-icons">assignment_return</i>Выйти
+                  <i class="material-icons">assignment_return</i>Logout
                 </a>
               </li>
             </ul>
+
           </li>
         </ul>
       </div>
@@ -78,9 +94,9 @@ export default {
     },
 
     logout() {
-      console.log("Logout")
+      window.M.toast("Logout");
       this.$store.dispatch('auth/logout');
-      this.$router.push('/login')
+      this.$router.push('/login');
     },
 
     dateFormat() {
@@ -103,14 +119,14 @@ export default {
     }, 1000);
 
     this.dropdown = window.M.Dropdown.init(this.$refs.dropdown, {
-        constrainWidth: true
+        constrainWidth: false
     });
 
   },
   beforeUnmount() {
     clearInterval(this.interval)
     if (this.dropdown && this.dropdown.destroy){
-      this.dropdown.destroy()
+      this.dropdown.destroy();
     }
   }
 }

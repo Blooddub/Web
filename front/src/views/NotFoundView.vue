@@ -7,8 +7,11 @@
         <li>a mistyped address</li>
         <li>an out-of-date link</li>
         <li>
-          <a href="#" class="black-text" @click.prevent="logout">
-            <i class="material-icons">assignment_return</i>Выйти
+          <a href="#" 
+            class="black-text" 
+            @click.prevent="reternlogin"
+          >
+            <i class="material-icons">assignment_return</i> Login
           </a>
         </li>
       </ul>
@@ -22,7 +25,7 @@
 export default {
   methods: {
     name: 'not-found-view',
-    logout() {
+    reternlogin() {
       this.$router.push('/login')
     }
   }

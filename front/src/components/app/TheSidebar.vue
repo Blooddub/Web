@@ -22,9 +22,9 @@ export default {
   data () {
     return {
       links: [
-        {title: 'Вузы', url: '/university'},
-        {title: 'Группы', url: '/groups'},
-        {title: 'Студенты', url: '/students'},
+        {title: 'Universites', url: '/universites'},
+        {title: 'Groups', url: '/groups'},
+        {title: 'Students', url: '/students'},
         // {title: 'Профиль', url: '/profile'},
       ]
     }

@@ -21,8 +21,12 @@
 import TheNavbar from '@/components/app/TheNavbar.vue';
 import TheSidebar from '@/components/app/TheSidebar.vue';
 
+
 export default {
   name: 'main-layout',
+  setup() {
+
+  },
   data() {
     return {
       isOpen: true

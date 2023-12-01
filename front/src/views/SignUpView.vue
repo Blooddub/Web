@@ -1,7 +1,7 @@
 <template>
   <form class="card auth-card" @submit.prevent="onSubmit">
     <div class="card-content">
-      <span class="card-title">Log In</span>
+      <span class="card-title">Sign Up</span>
       <br>
       <div class="input-field">
         <input 
@@ -19,7 +19,28 @@
         >
           {{ capitalizeFirstLetter(error.$property) }} {{error.$message}}
         </small>
+      </div> 
+
+      <div class="input-field">      
+        <input 
+          id="name" 
+          type="text" 
+          v-model.trim="name"
+          :class="{invalid: !v$.name.$errors.length == false}"
+        >
+        <label for="name">
+          Name 
+          <!-- <span class="required">*</span> -->
+        </label>
+        <small 
+          class="helper-text invalid" 
+          v-for="(error, index) of v$.name.$errors" 
+          :key="index"
+        >
+          {{ capitalizeFirstLetter(error.$property) }} {{error.$message}}
+        </small>
       </div>
+
       <div class="input-field">      
         <input 
           id="password" 
@@ -45,7 +66,7 @@
             type="submit"
         >
           <i class="material-icons right">send</i>
-          Войти
+          Sign Up
         </button>
         <!-- <div class="preloader-wrapper small " :class="{active: loading}">
             <div class="spinner-layer spinner-red-only">
@@ -61,12 +82,11 @@
       </div>
     </div>
   </form>
-
   <div>
-    <a href="/signup" 
+    <a href="/login" 
       class="white-text" 
     >
-      No account?
+      Have an account?
     </a>
   </div>
 </template>
@@ -76,15 +96,15 @@
 import { useVuelidate } from '@vuelidate/core'
 import { required, minLength } from '@vuelidate/validators'
 
-
 export default {
-  name: 'login-view',
+  name: 'singup-view',
   setup () {
     return { v$: useVuelidate() }
   },
   data() {
     return {
       login: '',
+      name: '',
       password: '',
       loading: false,
     }
@@ -92,6 +112,7 @@ export default {
   validations () {
     return {
       login: {required},
+      name: {},
       password: {required, minLength: minLength(8)},
     }
   },
@@ -116,10 +137,11 @@ export default {
       
       const user = {
         login: this.login,
+        name: this.login ? this.login : null,
         password: this.password,
       }
 
-      this.$store.dispatch("auth/login", user)
+      this.$store.dispatch("auth/signup", user)
       .then((response) => 
         {
           if(response.access_token){
@@ -135,7 +157,6 @@ export default {
     capitalizeFirstLetter(string) {
       return string.charAt(0).toUpperCase() + string.slice(1);
     },
-  },
-
+  }
 }
 </script>

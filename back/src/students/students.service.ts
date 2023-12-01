@@ -55,6 +55,9 @@ export class StudentsService {
         update_at: true,
         created_at: true,
       },
+      where: {
+        is_deleted: false,
+      },
       order: {
         id: "ASC",
       },

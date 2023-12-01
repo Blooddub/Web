@@ -23,8 +23,10 @@ export class GroupsService {
       where: {
         name: createGroupDto.name,
         university: {
-          id: createGroupDto.university.id 
-        }
+          id: createGroupDto.university.id,
+          is_deleted: false,
+        },
+        
       }
     })
 
@@ -60,6 +62,9 @@ export class GroupsService {
           name: true,
         }
       },
+      where: {
+        is_deleted: false,
+      },
       order: {
         id: "ASC",
       }
@@ -77,7 +82,8 @@ export class GroupsService {
         university: {
           id: true,
           name: true,
-      }},
+        },
+      },
       where: {
         id: id
       }

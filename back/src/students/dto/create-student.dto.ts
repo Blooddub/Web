@@ -1,4 +1,4 @@
-import { IsDateString, IsInt, IsNotEmpty, IsString } from "class-validator";
+import { IsDateString, IsInt, IsNotEmpty, IsString, ValidateIf } from "class-validator";
 import { Groups } from "src/groups/entities/group.entity";
 
 export class CreateStudentDto {
@@ -10,7 +10,8 @@ export class CreateStudentDto {
     surname: string;
 
     @IsString()
-    patronymic?: string;
+    @ValidateIf((object, value) => value !== null)
+    patronymic?: string | null;
 
     @IsDateString()
     birthday: Date;

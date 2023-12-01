@@ -1,5 +1,11 @@
 import { PartialType } from '@nestjs/mapped-types';
 import { CreateUniversityDto } from './create-university.dto';
-import { IsInt, IsString } from 'class-validator';
+import { IsInt, IsNotEmpty, IsString } from 'class-validator';
 
-export class UpdateUniversityDto extends PartialType(CreateUniversityDto) {}
+export class UpdateUniversityDto extends PartialType(CreateUniversityDto) {
+
+    @IsInt()
+    @IsNotEmpty()
+    id: number;
+
+}

@@ -35,7 +35,7 @@ export class UsersService {
 
     const access_token = this.jwtService.sign({login: newUser.login, id: newUser.id })
     
-    return {login: newUser.login, user_id:newUser.id, access_token}
+    return {login: newUser.login, id:newUser.id, access_token}
   }
 
   async findUser(login: string){
