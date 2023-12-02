@@ -48,6 +48,12 @@ const routes = [
     meta: {layout: 'main'},
     component: () => import( '../views/StudentsView.vue')
   },{
+    path: '/student/:id',
+    name: 'student',
+    meta: {layout: 'main'},
+    component: () => import( '../components/student/StudentComponent.vue')
+  },
+  {
     path: '/addstudent',
     name: 'addstudent',
     meta: {layout: 'main'},

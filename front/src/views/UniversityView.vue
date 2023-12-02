@@ -83,15 +83,14 @@ export default {
       );
     },
     deleteItems(id) {
-      console.log("Delete",id);
-      // universityService.deleteUniversitiy(id).then(
-      //   () => {
-      //     this.getUniversites();
-      //   },
-      //   (error) => {
-      //     window.M.toast({html: error.toString()})
-      //   }
-      // );
+      universityService.deleteUniversitiy(id).then(
+        () => {
+          this.getUniversites();
+        },
+        (error) => {
+          window.M.toast({html: error.toString()})
+        }
+      );
     },
     editItems(id) {
       console.log("Edit", id);

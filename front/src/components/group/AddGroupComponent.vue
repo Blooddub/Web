@@ -27,29 +27,15 @@
         </div>
 
         <!-- University -->
-        <div class="input-field ">
-            <select
-              id="select"
-              ref="select"
-              v-model.trim="selected"
-            >
-              <option disabled value=""> Select university </option>
-              <option 
-                data-target = "dropdownOptions"
-                v-for="item in list" 
-                :value="item.id"
-                :key="item.id"
-              >
-                {{item.name}}
-              </option>
-
-            </select>
-            <label for="select" >
-              Select
-              <span class="required">*</span>
-            </label>
+        <div class="input-field">
+          <SelectComponent
+            v-if="list"
+            :options= "list"
+            v-model= 'selected'
+          />
         </div>
-      </div>  
+      </div>   
+
       <!-- Button -->
       <div class="card-action">
         <div>
@@ -72,24 +58,25 @@
 import universityService from '@/services/university.service';
 import groupService from '@/services/group.service';
 
+import SelectComponent from '../fields/SelectComponent.vue';
+
+
 export default {
   name: 'add-group-component',
   data () {
     return {
       name: null,
       selected: null,
-      select: null,
       list: null,
     }
   },
   mounted() {
-    window.M.FormSelect.init(this.$refs.select);
+    this.getList();
   },
   methods: {
     getList() {
       universityService.getUniversities().then(
         (response) => {
-          console.log(response.data);
           this.list = response.data;
         },
         (error) =>{
@@ -101,10 +88,9 @@ export default {
       const newGroup = {
         name: this.name,
         university: {
-          id: 2, // Вернуть как заработает селектор this.selected
+          id: this.selected,
         }
       };
-      console.log(newGroup)
       groupService.createGroup(newGroup).then(
         () => {
           this.$router.push("/groups");
@@ -114,6 +100,9 @@ export default {
         }
       )
     },
+  },
+  components: {
+    SelectComponent
   },
 }
 </script>

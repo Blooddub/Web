@@ -5,7 +5,7 @@
       @submit.prevent="createStudent" 
     >
       <div class="card-content">
-        <span class="card-title center">Add student
+        <span class="card-title center">Add Student
           <router-link :to="'/students'" class="right">
             <i class="material-icons black-text">close</i>
           </router-link>
@@ -24,8 +24,6 @@
               first_name 
               <span class="required">*</span>
             </label>
-          <!-- <small class="helper-text invalid">
-          </small> -->
         </div>
 
         <!-- Surname -->
@@ -36,12 +34,10 @@
             type="text"
             autocomplete="name"
           >
-            <label for="surname">
-              surname 
-              <span class="required">*</span>
-            </label>
-           <!-- <small class="helper-text invalid">
-          </small> -->
+          <label for="surname">
+            surname 
+            <span class="required">*</span>
+          </label>
         </div>
 
         <!-- Patronymic -->
@@ -51,51 +47,31 @@
             v-model.trim="student.patronymic"
             type="text"
           >
-            <label for="patronymic">
-              patronymic 
-            </label>
-           <!-- <small class="helper-text invalid">
-          </small> -->
+          <label for="patronymic">
+            patronymic 
+          </label>
         </div>
 
         <!-- Birthday -->
-        <div class="input-field">
+        <div class="input-field disable">
           <input 
             id="birthday"
             v-model.trim="student.birthday"
             type="date"
           >
-            <label for="birthday">
-              birthday 
-              <span class="required">*</span>
-            </label>
-           <!-- <small class="helper-text invalid">
-          </small> -->
+          <label for="birthday">
+            birthday 
+            <span class="required">*</span>
+          </label>
         </div>
 
         <!-- Group -->
         <div class="input-field ">
-            <select
-              id="selectGroup"
-              ref="selectGroup"
-              v-model.trim="student.group"
-            >
-              <option disabled value=""> Select group </option>
-              <option 
-                data-target = "dropdownOptions"
-                v-for="item in groupsList" 
-                :value="item.id"
-                :key="item.id"
-              >
-                {{item.name}}
-              </option>
-
-            </select>
-            <label for="selectGroup" >
-              Groups Select
-              <span class="required">*</span>
-            </label>
-            <br/>
+          <SelectComponent
+            v-if="list"
+            :options= "list"
+            v-model= 'student.group.id'
+          />
         </div>
 
         <!-- Date_admission -->
@@ -105,13 +81,12 @@
             v-model.trim="student.date_admission"
             type="date"
           >
-            <label for="date_admission">
-              date_admission 
-              <span class="required">*</span>
-            </label>
-           <!-- <small class="helper-text invalid">
-          </small> -->
+          <label for="date_admission">
+            date_admission 
+            <span class="required">*</span>
+          </label>
         </div>
+
       </div>
 
       <!-- Button -->
@@ -119,7 +94,7 @@
         <div>
           <button
               class="btn waves-effect grey"
-              :class="{disabled: (student.first_name, student.surname, student.birthday, student.group, student.date_admission)  ? false : true}"
+              :class="{disabled: (student.first_name, student.surname, student.birthday, student.group.id, student.date_admission)  ? false : true}"
               type="submit"
           >
             <i class="material-icons right">send</i>
@@ -136,6 +111,8 @@
 import studentService from '@/services/student.service'
 import groupService from '@/services/group.service'
 
+import SelectComponent from '../fields/SelectComponent.vue';
+
 
 export default {
   name: 'add-student-component',
@@ -146,25 +123,22 @@ export default {
         surname: null,
         patronymic: null,
         birthday: null,
-        group: null,
+        group: {
+          id: null,
+        },
         date_admission: null,
       },
-      groupsList: null,
-      selectGroup: null, 
+      list: null,
     }
   },
-  beforeRouteView() {
-    this.getgroups();
-  },
   mounted() {
-    window.M.FormSelect.init(this.$refs.selectGroup);
+    this.getgroups();
   },
   methods: {
     getgroups() {
       groupService.getGroups().then(
         (response) => {
-          console.log(response.data);
-          this.groupsList = response.data;
+          this.list = response.data;
         },
         (error) =>{
           window.M.toast({html: error.toString()})
@@ -172,17 +146,7 @@ export default {
       )
     },
     createStudent() {
-      const newStudent = {
-        first_name: this.student.first_name,
-        surname: this.student.surname,
-        patronymic: this.student.patronymic,
-        birthday: this.student.birthday,
-        group: {
-          id: 7
-        },
-        date_admission: this.student.date_admission,
-      }
-      studentService.createStudent(newStudent).then(
+      studentService.createStudent(this.student).then(
         () => {
           this.$router.push("/students");
         },
@@ -191,11 +155,9 @@ export default {
         }
       )
     },
-    beforeUnmount() {
-      if (this.selectGroup && this.selectGroup.destroy){
-        this.selectGroup.destroy();
-      }
-    }
+  },
+  components: {
+    SelectComponent
   },
 }
 </script>

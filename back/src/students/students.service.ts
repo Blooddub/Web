@@ -75,7 +75,7 @@ export class StudentsService {
       throw new NotFoundException(`This student a #${id} not found`);
     }
 
-    return  await this.studentsRepository.find({
+    return  await this.studentsRepository.findOne({
       relations: {
         group: true,
       },

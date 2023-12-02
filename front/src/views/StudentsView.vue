@@ -34,11 +34,9 @@
             <td class="right">
               <ul style="display: flex">
                 <li>    
-                  <a href="" @click.prevent="editItems(items.id)">      
-                    <i class="material-icons Small black-text">
-                    create
-                    </i>
-                  </a>  
+                  <router-link :to="'/student/'+ (items.id)" class="right">
+                    <i class="material-icons black-text">create</i>
+                  </router-link>
                 </li>
                 <li>
                   <a href="" @click.prevent="deleteItems(items.id)">      

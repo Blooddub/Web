@@ -1,46 +1,60 @@
 <template>
-  <div class="input-field">
     <select
-    id="select"
-    ref="select"
-    v-model.trim="selected"
+      id="selector"
+      ref="selector"
+      v-model="selected"
+      class="grey lighten-1"
     >
-      <option disabled value=""> Select ... </option>
+      <option disabled value="" > Select ... </option>
       <option 
-          data-target = "dropdownOptions"
-          v-for="item in options" 
-          :value="item.id"
-          :key="item.id"
+        v-for="item in options" 
+        :value="item.id"
+        :key="item.id"
       >
-          {{item.name}}
+        {{item.name}}
       </option>
     </select>
-    <label for="select" >
+
+    <label for="selector" >
         Select
     </label>
-  </div>
 </template>
   
   
-  
-  <script>
-   
-  export default {
-    name: 'add-student-component',
-    data () {
-      return {
-        select: null, 
-        selected: "",
-        options: null,
-      }
-    },
-    mounted() {
-      window.M.FormSelect.init(this.$refs.select);
-    },
-    methods: {
 
-    },
+<script>
+   
+export default {
+  name: 'select-component',
+  props: {
+    options: { type: Array, required: true },
+    modelValue: {required: true }},
+  emits: ['update:modelValue'],
+  setup() {},
+  data () {
+    return {
+      selector: null, 
+    }
+  },
+  mounted() {
+    this.selector = window.M.FormSelect.init(this.$refs.selector);
+  },
+  computed: {
+    selected: {
+      get() {
+        return this.modelValue;
+      },
+      set(selected) {
+        this.$emit('update:modelValue', selected);
+      }
+    }
+  },
+  beforeUnmount(){
+    if (this.options && this.selector.destroy){
+        this.selector.destroy();
+    }
   }
-  </script>
+}
+</script>
   
   
